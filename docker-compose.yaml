@@ -1,12 +1,12 @@
 version: "3.8"
 services:
   products:
-    build: ./services/products
+    build: ./services/product
     container_name: products-service
     ports:
       - "5000:5000"
     volumes:
-      - ./services/products:/app/
+      - ./services/product:/app/
     environment:
       - MONGO_URL=mongodb
   blogs:
@@ -25,7 +25,7 @@ services:
       - products_url=products
       - blogs_url=blogs
     ports:
-      - "5002:5002"
+      - "3000:3000"
   mongodb:
     image: mongo:focal
     container_name: grpc-shop-mongo
