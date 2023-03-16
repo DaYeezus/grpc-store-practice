@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  products:
+    build: ./services/products
+    container_name: products-service
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./services/products:/app/
+    environment:
+      - MONGO_URL=mongodb
+  blogs:
+    build: ./services/blog
+    container_name: blogs-service
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./services/blog:/app/
+    environment:
+      - MONGO_URL=mongodb
+  client:
+    build: ./client
+    container_name: client
+    environment:
+      - products_url=products
+      - blogs_url=blogs
+    ports:
+      - "5002:5002"
+  mongodb:
+    image: mongo:focal
+    container_name: grpc-shop-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb:/data/db
+volumes:
+  mongodb:
