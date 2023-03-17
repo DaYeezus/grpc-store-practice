@@ -1,1 +1,1 @@
-console.log('blogs running');
+console.log("Blog")
