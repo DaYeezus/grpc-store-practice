@@ -8,24 +8,42 @@ services:
     volumes:
       - ./services/product:/app/
       - ./protos:/app/protos
+    depends_on:
+      - mongodb
     environment:
-      - MONGO_URL=mongodb
+      - MONGO_URL=mongodb://mongodb/grpc-shop-practice
+      - SERVER_ADDRESS=products:5000
+    networks:
+      grpc-practice-network:
   blogs:
     build: ./services/blog
     container_name: blogs-service
     ports:
-      - "5001:5001"
+      - "5002:5002"
     volumes:
       - ./services/blog:/app/
       - ./protos:/app/protos
+    depends_on:
+      - mongodb
     environment:
-      - MONGO_URL=mongodb
+      - MONGO_URL=mongodb://mongodb/grpc-shop-practice
+      - SERVER_ADDRESS=blogs:5000
+    networks:
+      grpc-practice-network:
   client:
     build: ./client
     container_name: client
+    volumes:
+      - ./client:/app/
+      - ./protos:/app/protos
     environment:
-      - products_url=products
-      - blogs_url=blogs
+      - products_url=products:5000
+      - blogs_url=blogs:5002
+    depends_on:
+      - products
+      - blogs
+    networks:
+      grpc-practice-network:
     ports:
       - "3000:3000"
   mongodb:
@@ -35,5 +53,10 @@ services:
       - "27017:27017"
     volumes:
       - mongodb:/data/db
+    networks:
+      grpc-practice-network:
 volumes:
   mongodb:
+networks:
+  grpc-practice-network:
+    driver: bridge
