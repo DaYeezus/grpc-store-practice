@@ -17,7 +17,6 @@ function main() {
         getProduct,
         listProduct
     })
-    console.log(process.env.SERVER_ADDRESS)
     server.bindAsync(process.env.SERVER_ADDRESS, grpc.ServerCredentials.createInsecure(), (err, port) => {
         if (err) return console.log(err.message)
         console.log("gRPC ProductService Runing over port " + port);

@@ -1,0 +1,36 @@
+syntax = "proto3";
+package blogPackage;
+import "google/protobuf/empty.proto";
+message Blog {
+  string id=1;
+  string title=2;
+  string content=3;
+}
+
+message BlogsList {
+  repeated Blog Blogs = 1;
+}
+
+message newBlog {
+  string title=1;
+  string content=2;
+}
+
+message BlogId {
+  string id=1;
+
+}
+
+
+message Result {
+  string status = 1;
+  string message = 2;
+}
+
+service BlogService {
+  rpc listBlogs (google.protobuf.Empty) returns (BlogsList);
+  rpc getBlog (BlogId) returns (Blog);
+  rpc createBlog (newBlog) returns (Result);
+  rpc updateBlog (Blog) returns (Result);
+  rpc removeBlog (BlogId) returns (Result);
+}

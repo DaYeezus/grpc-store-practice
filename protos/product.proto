@@ -1,6 +1,7 @@
 syntax = "proto3";
 package productPackage;
 import "google/protobuf/empty.proto";
+
 message Product{
     string id = 1;
     string title = 2;

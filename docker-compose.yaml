@@ -27,7 +27,7 @@ services:
       - mongodb
     environment:
       - MONGO_URL=mongodb://mongodb/grpc-shop-practice
-      - SERVER_ADDRESS=blogs:5000
+      - SERVER_ADDRESS=blogs:5002
     networks:
       grpc-practice-network:
   client:
