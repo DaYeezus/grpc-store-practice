@@ -9,7 +9,7 @@ const productClient = new productPackage.ProductService(process.env.products_url
 const router = express.Router()
 router.get("/" , (req,res,next) => {
     productClient.listProduct(null , (err , data) => {
-
+        console.log(data)
         if(err) {
             return res.status(500).json({
                 error :err

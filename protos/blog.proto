@@ -8,7 +8,7 @@ message Blog {
 }
 
 message BlogsList {
-  repeated Blog Blogs = 1;
+  repeated Blog blogs = 1;
 }
 
 message newBlog {

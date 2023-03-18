@@ -1,5 +1,6 @@
 const ProductModel = require("./product.model");
 const {isValidObjectId} = require("mongoose");
+const {compressionAlgorithms} = require("@grpc/grpc-js");
 
 async function deleteProduct(call, callBack) {
     try {
@@ -55,6 +56,7 @@ async function getProduct(call, callBack) {
 async function listProduct(call, callBack) {
     try {
         const products = await ProductModel.find({})
+        console.log(products)
         callBack(null , {products})
     } catch (err) {
         callBack(err, null)
